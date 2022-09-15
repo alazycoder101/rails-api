@@ -1,19 +1,23 @@
 FROM ruby:3.1.2-alpine
 
-ARG app=/opt/api
+ARG app=/opt/rails-api
 WORKDIR $app
 
 
+# libxml2-dev and libxslt-dev for nokogiri compiling
 RUN apk add --update --no-cache \
   build-base \
   tzdata \
   imagemagick \
+  libxml2-dev libxslt-dev \
   postgresql-dev
 
 ADD Gemfile Gemfile.lock ./
 RUN gem install bundler && \
     bundle config set deployment 'false' && \
     bundle config set with 'development' && \
+    bundle config set --local force_ruby_platform true && \
+    bundle config set --local build.nokogiri "--use-system-libraries" && \
     bundle install
 
 ENV RAILS_ROOT=$app \
