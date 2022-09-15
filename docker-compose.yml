@@ -16,7 +16,7 @@ services:
       RAILS_ENV: development
       PGHOST: db
       PGUSER: postgres
-      PORT: 3000
+      REDIS_URL: redis://redis
   db:
     image: postgres:14-alpine
     volumes:
@@ -26,6 +26,10 @@ services:
     environment:
       POSTGRES_HOST_AUTH_METHOD: "trust"
       POSTGRES_DB: "rails_api_dev"
+  redis:
+    image: redis:6.0.5-alpine
+    ports:
+      - 6379:6379
 volumes:
   code:
   database:
