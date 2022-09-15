@@ -1,7 +1,14 @@
-FROM ruby:3.1.2
+FROM ruby:3.1.2-alpine
 
 ARG app=/opt/api
 WORKDIR $app
+
+
+RUN apk add --update --no-cache \
+  build-base \
+  tzdata \
+  imagemagick \
+  postgresql-dev
 
 ADD Gemfile Gemfile.lock ./
 RUN gem install bundler && \

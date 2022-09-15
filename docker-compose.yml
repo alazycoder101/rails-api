@@ -5,10 +5,35 @@ version: '3'
 services:
   web:
     build: .
+    depends_on:
+      - db
     command: bundle exec rails s -p 3707 -b '0.0.0.0'
     volumes:
-      - .:/opt/users-api
+      - .:/opt/rails-api
     ports:
       - "3707:3707"
     environment:
       - "RAILS_ENV=development"
+  db:
+    image: postgres:14-alpine
+    volumes:
+      - database:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_DB: "rails_api_dev"
+volumes:
+  code:
+  database:
+
+# Define synchronization and forwarding sessions
+x-mutagen:
+  sync:
+    defaults:
+      ignore:
+        vcs: true
+    code:
+      alpha: "."
+      beta: "volume://code"
+      mode: "two-way-resolved"
