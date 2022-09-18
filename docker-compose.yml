@@ -1,8 +1,17 @@
 # docker-compose up
 # docker-compose run web rake db:migrate db:seed
 #
-version: '3'
+version: '3.6'
 services:
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    restart: always
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+        - 8080:8080
   web:
     build: .
     depends_on:
