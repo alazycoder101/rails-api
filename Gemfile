@@ -47,3 +47,5 @@ end
 
 
 gem "sidekiq", "~> 6.5"
+
+gem "rack-timeout", "~> 0.6.3"
