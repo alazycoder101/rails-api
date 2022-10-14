@@ -29,8 +29,14 @@ Things you may want to cover:
 * ...
 
 ```bash
+# models
 rails generate model Category name:string
 rails generate model Publisher name:string
 rails generate model Author name:string country: description:string
 rails g model Book title:string language:string publisher:references year:date description:string category:references author:references
+
+# controllers
+rails generate controller Api/Categories
+rails generate controller Api/Books
+rails generate controller Api/Authors
 ```

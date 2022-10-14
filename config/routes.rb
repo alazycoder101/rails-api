@@ -7,5 +7,8 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     get 'ping', to: 'health#ping'
+    resource :authors
+    resource :categories
+    resource :books
   end
 end
