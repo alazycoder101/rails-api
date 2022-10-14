@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+categories = Category.create([{ name: "Romance" }, { name: "Fiction" }])
+publishers = Publisher.create([{ name: "Cambridge" }, { name: "Mac Hill" }])
+authors = Author.create([{ name: "JK" }, { name: "John" }])
+
+category = categories.first
+author = authors.first
+publisher = publishers.first
+books = Book.create([{ title: "king of the ring", publisher: publisher, category: category, author: author },
+                     { title: "wonder", publisher: publisher, category: category, author: author}])
